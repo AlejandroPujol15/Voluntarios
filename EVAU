@@ -1,0 +1,40 @@
+#Calcula la nota evau 
+def evau():
+    ingles=int(input("Cual es tu nota de ingles: "))
+    if(ingles>10):
+        print("No es posible")
+    else:
+        mates=int(input("Cual es tu nota de mates: "))
+        if(mates>10):
+            print("No es posible")
+        else:
+            lengua=int(input("Cual es tu nota de lengua: "))
+            if(lengua>10):
+                print("No es posible")
+            else:
+                historia=int(input("Cual es tu nota de historia: "))
+                if(historia>10):
+                    print("No es posible")
+                a="Tu nota media de evau es de: "+str((lengua+mates+ingles+historia)/4)
+                print(a)
+                print("")   
+                primero=int(input("Cual es tu nota de primero: "))
+                if(primero>10):
+                    print("No es posible")
+                else:
+                    segundo=int(input("Cual es tu nota media de segundo: "))
+                    if(segundo>10):
+                        print("No es posible")
+                    b="Tu nota media de bachiller es de: "+str((primero+segundo)/2)
+                    print(b)
+                    print("")
+                    p1=float(input("Cuanto pondera tu primera voluntaria: "))
+                    p2=float(input("Cuanto pondera tu segunda voluntaria: "))
+                    if(p1<0 or p1>0.2 or p2<0 or p2>0.2):
+                        print("Ponderaciones no validas, vuelve a introducirlas")
+                    else:
+                        v1=int(input("Cual es tu nota de la primer voluntaria: "))
+                        v2=int(input("Cual es tu segunda nota voluntaria: "))
+                        notaevau=(a+b)+(v1*p1)+(v2*p2)
+                        print(f"Tu nota final de la evau es {notaevau}")
+evau()
