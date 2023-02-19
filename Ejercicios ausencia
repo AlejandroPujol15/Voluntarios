@@ -1,0 +1,88 @@
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+using namespace std;
+
+// Función que comprueba si un número ya está en la matriz
+bool estaEnMatriz(int **matriz, int num) {
+    for(int filas=0; filas<3; filas++) {
+        for(int col=0; col<3; col++) {    
+            if(*(*(matriz+filas)+col) == num) {
+                return true;
+            }
+        }    
+    }
+    return false;
+}
+
+// Función que devuelve la suma de los números de una fila
+int sumaFila(int **matriz, int fila) {
+    int suma = 0;
+    for(int col=0; col<3; col++) {
+        suma += *(*(matriz+fila)+col);
+    }
+    return suma;
+}
+
+// Función que genera una matriz 3x3 de letras aleatorias
+void generarMatrizLetras(char **matriz) {
+    for(int filas=0; filas<3; filas++) {
+        // Reservo memoria para las filas
+        matriz[filas] = (char *) malloc(3*sizeof(char));
+        for(int col=0; col<3; col++) {
+            // Genero una letra aleatoria entre la 'a' y la 'z'
+            *(*(matriz+filas)+col) = rand()%26 + 'a';
+        }
+    }
+}
+
+int main() {
+    long semillita;
+    int *matriz[3];
+
+    // Genero una semilla aleatoria
+    semillita = time(0);
+    srand(semillita);
+
+    // Genero la matriz de números aleatorios
+    for(int filas=0; filas<3; filas++) {
+        // Reservo memoria para las filas
+        matriz[filas] = (int *) malloc(3*sizeof(int));
+        for(int col=0; col<3; col++) {    
+            int numAleatorio;
+            do {
+                numAleatorio = rand()%10;
+            } while(estaEnMatriz(matriz, numAleatorio)); // Compruebo que el número no esté ya en la matriz
+            *(*(matriz+filas)+col) = numAleatorio;
+        }    
+    }
+
+    // Muestro la matriz de números aleatorios
+    cout << "Matriz de numeros aleatorios:" << endl;
+    for(int filas=0; filas<3; filas++) {
+        for(int col=0; col<3; col++) {    
+            printf("%d ",*(*(matriz+filas)+col));
+        }
+        printf("\n");
+    }
+
+    // Calculo la suma de la segunda fila
+    int sumaSegundaFila = sumaFila(matriz, 1);
+    cout << "La suma de la segunda fila es: " << sumaSegundaFila << endl;
+
+    // Genero la matriz de letras aleatorias
+    char *matrizLetras[3];
+    generarMatrizLetras(matrizLetras);
+
+    // Muestro la matriz de letras aleatorias
+    cout << "Matriz de letras aleatorias:" << endl;
+    for(int filas=0; filas<3; filas++) {
+        for(int col=0; col<3; col++) {    
+            printf("%c ",*(*(matrizLetras+filas)+col));
+        }
+        printf("\n");
+    }
+
+    return 
